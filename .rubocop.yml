@@ -1,0 +1,74 @@
+---
+
+AllCops:
+  Exclude:
+    - 'bin/**/*'
+    - 'db/schema.rb'
+    - 'vendor/bundle/**/*'
+
+Layout/EmptyLines:
+  Enabled: false
+
+Layout/EmptyLinesAroundBlockBody:
+  Enabled: false
+
+Layout/LineLength:
+  Max: 120
+
+Lint/AmbiguousBlockAssociation:
+  Enabled: true
+  Exclude:
+    - spec/**/*
+
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/BlockLength:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+Metrics/MethodLength:
+  Max: 120
+
+Metrics/ClassLength:
+  Max: 150
+
+Metrics/PerceivedComplexity:
+  Enabled: false
+
+Security/Eval:
+  Exclude:
+    - 'app/models/concerns/cached_method.rb'
+
+Style/Documentation:
+  Enabled: false
+
+Style/IfUnlessModifier:
+  Enabled: false
+
+Style/RescueModifier:
+  Exclude:
+    - 'app/models/concerns/cached_method.rb'
+
+Style/SymbolArray:
+  EnforcedStyle: brackets
+
+Style/WordArray:
+  EnforcedStyle: brackets
+
+Style/MixinUsage:
+  Enabled: true
+  Exclude:
+    - spec/acceptance/**/*
+
+Lint/AmbiguousOperator:
+  Enabled: true
+  Exclude:
+    - spec/acceptance/**/*
+
+Style/NumericLiterals:
+  Enabled: true
+  Exclude:
+    - spec/**/*
