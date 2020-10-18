@@ -5,5 +5,6 @@ FactoryBot.define do
     name { Faker::Music::PearlJam.song }
     price { Faker::Number.number(4) }
     valid_for { 'Month' }
+    uuid { SecureRandom.uuid }
   end
 end

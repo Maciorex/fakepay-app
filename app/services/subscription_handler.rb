@@ -3,13 +3,13 @@
 class SubscriptionHandler
   def initialize(request_params:)
     @request_params = request_params
-    @product = Product.find(request_params[:product_id])
+    @product = Product.find_by(uuid: request_params[:product_uuid])
   end
 
   def call
     customer = create_or_fetch_customer
-    perform_payment
-    create_subscription(customer: customer)
+    response = perform_payment
+    create_subscription(customer: customer, token: response[:body][:token]) if response[:status] == 200
   end
 
   private
@@ -25,7 +25,7 @@ class SubscriptionHandler
   end
 
   def perform_payment
-    FakepayPaymentGateway.new(product: product).perform_first_payment(payment_data: payment_data)
+    FakepayPaymentGateway.new.perform_first_payment(payment_data: payment_data)
   end
 
   def create_subscription(customer:)
@@ -34,10 +34,12 @@ class SubscriptionHandler
 
   def payment_data
     @payment_data ||= {
+      amount: product.price,
       card_number: request_params[:card_number],
       cvv: request_params[:cvv],
-      expiration_month: request_params[:card_expiration_date],
-      expiration_year: request_params[:billing_zip_code]
+      expiration_month: Date.parse(request_params[:card_expiration_date]).strftime('%m'),
+      expiration_year: Date.parse(request_params[:card_expiration_date]).strftime('%Y'),
+      zip_code: request_params[:zip_code]
     }
   end
 end

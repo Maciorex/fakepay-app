@@ -1,21 +1,21 @@
 # frozen_string_literal: true
 
 class FakepayPaymentGateway
-  def initialize(product: product)
-    @product = product
-  end
+  def perform_first_payment(payment_data:)
+    response = fakepay_connection.post do |request|
+      request.body = payment_data.to_json
+    end
 
-  def perform_first_payment
-    http.post
+    { status: response.status, body: JSON.parse(response.body, symbolize_names: true) }
   end
 
   private
 
-  def http
+  def fakepay_connection
     Faraday.new(
       url: Rails.application.credentials.fakepay[:url],
       headers: { 'Authorization' => "Token token=#{api_token}",
-                 'Accept' => 'application/json' }
+                 'Content-Type' => 'application/json' }
     )
   end
 
