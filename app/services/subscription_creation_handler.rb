@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class SubscriptionHandler
+class SubscriptionCreationHandler
   def initialize(request_params:)
     @request_params = request_params
     @product = Product.find_by(uuid: request_params[:product_uuid])
@@ -28,8 +28,14 @@ class SubscriptionHandler
     FakepayPaymentGateway.new.perform_first_payment(payment_data: payment_data)
   end
 
-  def create_subscription(customer:)
-    Subscription.create(customer: customer)
+  def create_subscription(customer:, token:)
+    Subscription.create(
+      customer: customer,
+      product: product,
+      fakepay_token: token,
+      subscribe_date: Date.today,
+      expiration_date: Date.today + 1.month
+    )
   end
 
   def payment_data

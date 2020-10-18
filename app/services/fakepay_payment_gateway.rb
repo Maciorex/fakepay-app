@@ -9,6 +9,12 @@ class FakepayPaymentGateway
     { status: response.status, body: JSON.parse(response.body, symbolize_names: true) }
   end
 
+  def perform_regular_payment(subscription:)
+    fakepay_connection.post do |request|
+      request.body = { amount: subscription.product.price, token: subscription.fakepay_token }.to_json
+    end
+  end
+
   private
 
   def fakepay_connection

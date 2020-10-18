@@ -5,7 +5,7 @@ module Api
     class SubscriptionsController < ApplicationController
       # POST /api/v1/subscriptions
       def create
-        SubscriptionHandler.new(request_params: subscription_request_params).call
+        SubscriptionCreationHandler.new(request_params: subscription_request_params).call
       end
 
       private
