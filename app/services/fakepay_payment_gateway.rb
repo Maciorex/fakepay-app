@@ -6,7 +6,6 @@ class FakepayPaymentGateway
   end
 
   def perform_first_payment
-    binding.pry
     http.post
   end
 
