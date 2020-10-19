@@ -6,3 +6,12 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+{ 'Bronze Box': '1999', 'Silver Box': '4900', 'Gold Box': '9900' }.each do |name, price|
+  Product.create(
+    name: name,
+    price: price,
+    valid_for: 'Month',
+    uuid: SecureRandom.uuid
+  )
+end

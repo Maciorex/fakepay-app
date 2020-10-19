@@ -6,7 +6,7 @@ class FakepayPaymentGateway
       request.body = payment_data.to_json
     end
 
-    { status: response.status, body: JSON.parse(response.body, symbolize_names: true) }
+    parse_response(response: response)
   end
 
   def perform_regular_payment(subscription:)
@@ -27,5 +27,12 @@ class FakepayPaymentGateway
 
   def api_token
     Rails.application.credentials.fakepay[:api_key]
+  end
+
+  def parse_response(response:)
+    {
+      status: response.status,
+      body: JSON.parse(response.body, symbolize_names: true)
+    }
   end
 end
