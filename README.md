@@ -12,7 +12,6 @@
       "customer_name": "Lucas Braathen",
       "address": "123 St",
       "zip_code": "10045",
-      "product_id": 3,
       "card_number": "4242424242424242",
       "cvv": "123",
       "card_expiration_date": "2021-10-19",

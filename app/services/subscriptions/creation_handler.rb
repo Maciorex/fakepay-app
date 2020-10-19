@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Subscriptions
   class CreationHandler
     def initialize(request_params:)
