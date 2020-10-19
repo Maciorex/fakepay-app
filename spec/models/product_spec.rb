@@ -8,12 +8,8 @@ RSpec.describe Product, type: :model do
       expect(build(:product, name: '')).not_to be_valid
     end
 
-    it 'validates price' do
-      expect(build(:product, price: '')).not_to be_valid
-    end
-
-    it 'validates valid_for' do
-      expect(build(:product, valid_for: '')).not_to be_valid
+    it 'validates price_in_cents' do
+      expect(build(:product, price_in_cents: '')).not_to be_valid
     end
   end
 end

@@ -4,9 +4,9 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::SubscriptionsController, type: :controller do
   let!(:products) do
-    create(:product, name: 'Bronze Box', price: '1999', uuid: '11111111-1111-1111-1111-111111111111')
-    create(:product, name: 'Silver Box', price: '4900', uuid: '22222222-1111-1111-1111-111111111111')
-    create(:product, name: 'Gold Box', price: '9900', uuid: '33333333-1111-1111-1111-111111111111')
+    create(:product, name: 'Bronze Box', price_in_cents: '1999', uuid: '11111111-1111-1111-1111-111111111111')
+    create(:product, name: 'Silver Box', price_in_cents: '4900', uuid: '22222222-1111-1111-1111-111111111111')
+    create(:product, name: 'Gold Box', price_in_cents: '9900', uuid: '33333333-1111-1111-1111-111111111111')
   end
 
   describe 'POST create' do

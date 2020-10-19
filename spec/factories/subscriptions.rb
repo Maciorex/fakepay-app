@@ -6,5 +6,6 @@ FactoryBot.define do
     association :product, factory: :product
     subscribe_date { Date.today }
     expiration_date { Date.today + 6.months }
+    next_payment_date { Date.today + 1.month }
   end
 end

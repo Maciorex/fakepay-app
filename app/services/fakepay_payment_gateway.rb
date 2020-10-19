@@ -11,7 +11,7 @@ class FakepayPaymentGateway
 
   def perform_regular_payment(subscription:)
     fakepay_connection.post do |request|
-      request.body = { amount: subscription.product.price, token: subscription.fakepay_token }.to_json
+      request.body = { amount: subscription.product.price_in_cents, token: subscription.fakepay_token }.to_json
     end
   end
 

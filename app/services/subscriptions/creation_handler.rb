@@ -44,7 +44,7 @@ module Subscriptions
 
     def payment_data
       @payment_data ||= {
-        amount: product.price,
+        amount: product.price_in_cents,
         card_number: request_params[:card_number],
         cvv: request_params[:cvv],
         expiration_month: Date.parse(request_params[:card_expiration_date]).strftime('%m'),
