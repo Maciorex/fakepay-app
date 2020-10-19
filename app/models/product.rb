@@ -6,5 +6,5 @@ class Product < ApplicationRecord
   validates :name, presence: true
   validates :price, presence: true
   validates :valid_for, presence: true
-  validates :uuid, presence: true
+  validates :uuid, presence: true, uniqueness: true
 end

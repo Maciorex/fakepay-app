@@ -45,7 +45,7 @@ class SubscriptionCreationHandler
       cvv: request_params[:cvv],
       expiration_month: Date.parse(request_params[:card_expiration_date]).strftime('%m'),
       expiration_year: Date.parse(request_params[:card_expiration_date]).strftime('%Y'),
-      zip_code: request_params[:zip_code]
+      zip_code: request_params[:billing_zip_code]
     }
   end
 end
