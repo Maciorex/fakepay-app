@@ -38,8 +38,14 @@ module Subscriptions
         product: product,
         fakepay_token: token,
         subscribe_date: Date.today,
-        expiration_date: Date.today + 1.month
+        expiration_date: calculate_subscribtion_expiration_date,
+        next_payment_date: Date.today + 1.month
       )
+    end
+
+    def calculate_subscribtion_expiration_date
+      months_valid = request_params[:months_valid].to_i
+      Date.today + months_valid.months
     end
 
     def payment_data

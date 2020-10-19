@@ -14,7 +14,7 @@ module Api
 
       def subscription_request_params
         params.require(:subscription)
-              .permit(:customer_name, :address, :zip_code, :card_number,
+              .permit(:customer_name, :address, :zip_code, :card_number, :months_valid,
                       :cvv, :card_expiration_date, :billing_zip_code, :product_uuid)
       end
 
