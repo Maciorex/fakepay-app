@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class FakepayPaymentGateway
+class FakepayGateway
   def perform_first_payment(payment_data:)
     response = fakepay_connection.post do |request|
       request.body = payment_data.to_json

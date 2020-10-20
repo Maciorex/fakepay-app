@@ -8,32 +8,31 @@ RSpec.describe Api::V1::SubscriptionsController, type: :controller do
   end
 
   describe 'POST /api/v1/subscriptions' do
-    subject { post :create, { params: valid_params } }
+    subject { post :create, { params: params } }
 
-    let(:valid_params) do
+    let(:params) do
       {
-
         subscription:
         {
-          customer_name: 'Lucas Braathen',
+          customer_name: 'Filip Zubcic',
           address: 'asd',
           zip_code: '51-986',
           card_number: '4242424242424242',
           cvv: '123',
-          card_expiration_date: Date.today + 3.years,
+          card_expiration_date: (Date.today + 3.years).strftime('%m/%Y'),
           billing_zip_code: '10045',
           product_uuid: '11111111-1111-1111-1111-111111111111',
           months_valid: 5
         }
       }
     end
-    let(:creation_handler_service) { instance_double(Subscriptions::CreationHandler) }
     let(:service_response) do
       {
         status: 200,
         body: { token: 'cb93b2f036eb849320cb4c685f66c4', success: true, error_code: nil }
       }
     end
+    let(:creation_handler_service) { instance_double(Subscriptions::CreationHandler) }
 
     before do
       allow(Subscriptions::CreationHandler).to receive(:new).and_return(creation_handler_service)

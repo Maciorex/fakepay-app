@@ -14,7 +14,7 @@
       "zip_code": "10045",
       "card_number": "4242424242424242",
       "cvv": "123",
-      "card_expiration_date": "2021-10-19",
+      "card_expiration_date": "10/2021",
       "billing_zip_code": "10045",
       "product_uuid": "99c74d44-08a1-43e0-bd6a-53dba636a876"
       "months_valid": 5

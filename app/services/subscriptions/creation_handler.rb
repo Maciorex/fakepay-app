@@ -29,7 +29,7 @@ module Subscriptions
     end
 
     def perform_payment
-      FakepayPaymentGateway.new.perform_first_payment(payment_data: payment_data)
+      FakepayGateway.new.perform_first_payment(payment_data: payment_data)
     end
 
     def create_subscription(customer:, token:)

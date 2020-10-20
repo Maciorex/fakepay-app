@@ -22,7 +22,7 @@ RSpec.describe do
           zip_code: '51-986',
           card_number: '4242424242424242',
           cvv: '123',
-          card_expiration_date: Date.today + 3.years,
+          card_expiration_date: (Date.today + 3.years).strftime('%m/%Y'),
           billing_zip_code: '10045',
           product_uuid: '11111111-1111-1111-1111-111111111111',
           months_valid: 5
@@ -50,24 +50,10 @@ RSpec.describe do
     end
 
     context 'when customer does not exist' do
-      it 'returns 200' do
+      it 'returns 200 with proper message' do
         subject
         expect(response.status).to eq(200)
-      end
-
-      it 'creates new customer record with proper data' do
-        expect { subject }.to change { Customer.count }.by(1)
-        expect(Customer.last.name).to eq('Lucas Braathen')
-      end
-
-      it 'creates new subscription record with proper data' do
-        expect { subject }.to change { Subscription.count }.by(1)
-        expect(Subscription.last.fakepay_token).to eq('111111111111111111')
-      end
-
-      it 'sets up correct subscription associations' do
-        subject
-        expect(Subscription.last.customer).to eq(Customer.find_by(name: 'Lucas Braathen'))
+        expect(response.body).to eq('Subscription created succesfully'.to_json)
       end
     end
 
@@ -77,38 +63,20 @@ RSpec.describe do
       it 'returns 200' do
         subject
         expect(response.status).to eq(200)
-      end
-
-      it 'does NOT create new customer record' do
-        expect { subject }.not_to change { Customer.count }
-      end
-
-      it 'creates new subscription record with proper data' do
-        expect { subject }.to change { Subscription.count }.by(1)
-        expect(Subscription.last.fakepay_token).to eq('111111111111111111')
-      end
-
-      it 'sets up correct subscription associations' do
-        subject
-        expect(Subscription.last.customer).to eq(customer)
+        expect(response.body).to eq('Subscription created succesfully'.to_json)
       end
 
       context 'when customer has existing subscription' do
         let!(:subscription) { create(:subscription, customer: customer, product: Product.last) }
 
-        it 'creates new subscription record with proper data' do
-          expect { subject }.to change { Subscription.count }.by(1)
-          expect(Subscription.last.fakepay_token).to eq('111111111111111111')
-        end
-
-        it 'sets up correct subscription associations' do
+        it 'returns 200' do
           subject
-          expect(Subscription.last.customer).to eq(customer)
+          expect(response.status).to eq(200)
+          expect(response.body).to eq('Subscription created succesfully'.to_json)
         end
       end
     end
   end
-
 
   context 'when fakepay response is 4xx' do
     subject { post '/api/v1/subscriptions', { params: invalid_params } }

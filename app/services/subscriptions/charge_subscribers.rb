@@ -16,7 +16,7 @@ module Subscriptions
     end
 
     def payment_service
-      @payment_service ||= FakepayPaymentGateway.new
+      @payment_service ||= FakepayGateway.new
     end
   end
 end
