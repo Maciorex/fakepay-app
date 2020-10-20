@@ -14,7 +14,7 @@ class FakepayGateway
       request.body = { amount: subscription.product.price_in_cents, token: subscription.fakepay_token }.to_json
     end
 
-    update_next_payment_date(subscription: subscription) if response.success?
+    parse_response(response: response)
   end
 
   private
@@ -27,13 +27,6 @@ class FakepayGateway
     )
   end
 
-  def update_next_payment_date(subscription:)
-    payment_date = Date.today + 1.month
-    next_payment_date = payment_date > subscription.expiration_date ? nil : payment_date
-
-    subscription.update!(next_payment_date: next_payment_date)
-  end
-
   def api_token
     Rails.application.credentials.fakepay[:api_key]
   end
@@ -41,7 +34,7 @@ class FakepayGateway
   def parse_response(response:)
     {
       status: response.status,
-      body: JSON.parse(response.body, symbolize_names: true)
+      body: JSON.parse(response.body.presence || '{}', symbolize_names: true)
     }
   end
 end
