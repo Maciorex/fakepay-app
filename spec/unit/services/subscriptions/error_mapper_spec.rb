@@ -9,6 +9,6 @@ RSpec.describe Subscriptions::ErrorMapper do
   context 'when error code is 1_000_006' do
     let(:error_code) { 1_000_006 }
 
-    it { is_expected.to eq('Error: Invalid purchase amount')}
+    it { is_expected.to eq('Error: Invalid purchase amount') }
   end
 end
