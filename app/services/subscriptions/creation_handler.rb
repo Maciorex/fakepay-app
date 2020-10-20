@@ -8,6 +8,9 @@ module Subscriptions
     end
 
     def call
+      # just basic error handling for this case
+      raise StandardError, "Product with uuid: #{request_params[:product_uuid]} does not exists" unless product
+
       customer = create_or_fetch_customer
       response = perform_payment
       return response unless response[:status] == 200
