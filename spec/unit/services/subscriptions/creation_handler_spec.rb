@@ -117,6 +117,30 @@ RSpec.describe Subscriptions::CreationHandler do
     end
   end
 
+  context 'when receiving 4xx from fakepay' do
+    let(:fakepay_response) do
+      {
+        status: 422,
+        body: { token: nil, success: false, error_code: 1000004 }
+      }
+    end
+
+    it 'calls fakepay_gateway service' do
+      expect(fakepay_gateway).to receive(:perform_first_payment)
+
+      subject
+    end
+
+    it 'creates new customer record with proper data' do
+      expect { subject }.to change { Customer.count }.by(1)
+      expect(Customer.last.name).to eq('Marco Odermatt')
+    end
+
+    it 'does NOT create new subscription record' do
+      expect { subject }.not_to change { Subscription.count }
+    end
+  end
+
   context 'when product with requested uuid does not exist' do
     let(:product_uuid) { 'wroooooong_uuid' }
 
