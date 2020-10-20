@@ -13,6 +13,8 @@ module Subscriptions
       1_000_008 => 'Invalid params: cannot specify both  token  and other credit card params'
     }.freeze
 
+    private_constant :FAKEPAY_ERROR_MAP
+
     def map_erronous_response(error_code:)
       "Error: #{FAKEPAY_ERROR_MAP.fetch(error_code)}"
     end
