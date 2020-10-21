@@ -1,5 +1,26 @@
 # FakePay APP
 
+Fakepay coding challenge app.
+
+## Requirements
+- create api for subscription creation
+- one customer can have multiple subscriptions
+- create a code that could be used for re-charging subscriptions
+
+## Setup
+
+You need a `master.key` to be able to get to secrets.
+To set up db just run `docker-compose up` and `rails db:seed` to populate products in DB.
+
+## API paramaters
+<table>
+  <tr>
+    <td><strong>Name</strong></td>
+    <td><strong>Type</strong></td>
+    <td><strong>Description</strong></td>
+  </tr>
+</table>
+
 ## Request Example
 ```
  curl "localhost:3000/api/v1/subscriptions" \
