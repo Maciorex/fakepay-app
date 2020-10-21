@@ -20,7 +20,7 @@ RSpec.describe Subscriptions::CreationHandler do
   end
   let(:payment_data) do
     {
-      amount: '1999',
+      amount: 1999,
       card_number: '4242424242424242',
       cvv: '123',
       expiration_month: '10',
@@ -35,7 +35,7 @@ RSpec.describe Subscriptions::CreationHandler do
     }
   end
   let!(:product) do
-    create(:product, name: 'Bronze Box', price_in_cents: '1999', uuid: '11111111-1111-1111-1111-111111111111')
+    create(:product, name: 'Bronze Box', price_in_cents: 1999, uuid: '11111111-1111-1111-1111-111111111111')
   end
   let(:fakepay_gateway) { instance_double(FakepayGateway) }
   let(:product_uuid) { '11111111-1111-1111-1111-111111111111' }
@@ -143,7 +143,7 @@ RSpec.describe Subscriptions::CreationHandler do
 
   context 'when product with requested uuid does not exist' do
     let(:product_uuid) { 'wroooooong_uuid' }
-    let(:erronous_response) { { message: "Product with uuid: wroooooong_uuid does not exists", status: 400 } }
+    let(:erronous_response) { { message: 'Product with uuid: wroooooong_uuid does not exists', status: 400 } }
 
     it 'returns erroronous response' do
       expect(subject).to eq(erronous_response)

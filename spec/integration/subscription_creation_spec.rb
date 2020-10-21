@@ -4,9 +4,9 @@ require 'rails_helper'
 
 RSpec.describe do
   let!(:products) do
-    create(:product, name: 'Bronze Box', price_in_cents: '1999', uuid: '11111111-1111-1111-1111-111111111111')
-    create(:product, name: 'Silver Box', price_in_cents: '4900', uuid: '22222222-1111-1111-1111-111111111111')
-    create(:product, name: 'Gold Box', price_in_cents: '9900', uuid: '33333333-1111-1111-1111-111111111111')
+    create(:product, name: 'Bronze Box', price_in_cents: 1999, uuid: '11111111-1111-1111-1111-111111111111')
+    create(:product, name: 'Silver Box', price_in_cents: 4900, uuid: '22222222-1111-1111-1111-111111111111')
+    create(:product, name: 'Gold Box', price_in_cents: 9900, uuid: '33333333-1111-1111-1111-111111111111')
   end
 
   subject { post '/api/v1/subscriptions', { params: request_params } }
@@ -35,7 +35,7 @@ RSpec.describe do
       stub_request(:post, 'https://www.fakepay.io/purchase')
         .with(
           body: {
-            amount: '1999',
+            amount: 1999,
             card_number: '4242424242424242',
             cvv: '123',
             expiration_month: '10',
@@ -102,7 +102,7 @@ RSpec.describe do
       stub_request(:post, 'https://www.fakepay.io/purchase')
         .with(
           body: {
-            'amount' => '1999',
+            'amount' => 1999,
             'card_number' => '4242424242424242',
             'cvv' => '977',
             'expiration_month' => '10',

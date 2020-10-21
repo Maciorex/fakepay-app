@@ -7,7 +7,7 @@ RSpec.describe FakepayGateway do
 
   let(:payment_data) do
     {
-      amount: '1999',
+      amount: 1999,
       card_number: '4242424242424242',
       cvv: '123',
       expiration_month: '10',
@@ -20,7 +20,7 @@ RSpec.describe FakepayGateway do
     stub_request(:post, 'https://www.fakepay.io/purchase')
       .with(
         body: {
-          amount: '1999',
+          amount: 1999,
           card_number: '4242424242424242',
           cvv: '123',
           expiration_month: '10',
