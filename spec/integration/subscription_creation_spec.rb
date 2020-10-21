@@ -127,8 +127,10 @@ RSpec.describe do
   context 'when product with requested uuid does not exist' do
     let(:product_uuid) { 'wroooooong_uuid' }
 
-    it 'raises an error' do
-      expect { subject }.to raise_error('Product with uuid: wroooooong_uuid does not exists')
+    it 'returns 400' do
+      subject
+      expect(response.status).to eq(400)
+      expect(JSON.parse(response.body)).to eq('Product with uuid: wroooooong_uuid does not exists')
     end
   end
 end

@@ -21,8 +21,10 @@ module Api
       def parse_response(response:)
         if response[:status] == 200
           'Subscription created succesfully'
-        else
+        elsif response[:status] == 422
           Subscriptions::ErrorMapper.new.map_erronous_response(error_code: response[:body][:error_code])
+        else
+          response[:message]
         end
       end
     end

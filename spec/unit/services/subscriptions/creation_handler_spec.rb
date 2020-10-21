@@ -143,9 +143,10 @@ RSpec.describe Subscriptions::CreationHandler do
 
   context 'when product with requested uuid does not exist' do
     let(:product_uuid) { 'wroooooong_uuid' }
+    let(:erronous_response) { { message: "Product with uuid: wroooooong_uuid does not exists", status: 400 } }
 
-    it 'raises an error' do
-      expect { subject }.to raise_error('Product with uuid: wroooooong_uuid does not exists')
+    it 'returns erroronous response' do
+      expect(subject).to eq(erronous_response)
     end
   end
 end

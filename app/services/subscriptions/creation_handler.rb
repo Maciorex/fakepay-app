@@ -8,8 +8,8 @@ module Subscriptions
     end
 
     def call
-      # just basic error handling for this case
-      raise StandardError, "Product with uuid: #{request_params[:product_uuid]} does not exists" unless product
+      # just basic error handling for this case, should be rescued by some custom error handling
+      return product_not_found_response unless product
 
       customer = create_or_fetch_customer
       response = perform_payment
@@ -72,6 +72,13 @@ module Subscriptions
 
     def card_expiration_year
       Date.parse(request_params[:card_expiration_date]).strftime('%Y')
+    end
+
+    def product_not_found_response
+      {
+        message: "Product with uuid: #{request_params[:product_uuid]} does not exists",
+        status: 400
+      }
     end
   end
 end
