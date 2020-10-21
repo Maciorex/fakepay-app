@@ -19,6 +19,51 @@ To set up db just run `docker-compose up` and `rails db:seed` to populate produc
     <td><strong>Type</strong></td>
     <td><strong>Description</strong></td>
   </tr>
+  <tr>
+    <td><code>customer_name</code></td>
+    <td>string</td>
+    <td>Customer's first and last name</td>
+  </tr>
+  <tr>
+    <td><code>address</code></td>
+    <td>string</td>
+    <td>Customer's address</td>
+  </tr>
+  <tr>
+    <td><code>zip_code</code></td>
+    <td>string</td>
+    <td>Customer's zip code</td>
+  </tr>
+  <tr>
+    <td><code>card_number</code></td>
+    <td>string</td>
+    <td>Card number</td>
+  </tr>
+  <tr>
+    <td><code>cvv</code></td>
+    <td>string</td>
+    <td>Card cvv code</td>
+  </tr>
+  <tr>
+    <td><code>card_expiration_date</code></td>
+    <td>string</td>
+    <td>Card expiration date, format: MM/YYYY</td>
+  </tr>
+  <tr>
+    <td><code>billing_zip_code</code></td>
+    <td>string</td>
+    <td>Billing zip code</td>
+  </tr>
+  <tr>
+    <td><code>product_uuid</code></td>
+    <td>string</td>
+    <td>Subscribed product uuid</td>
+  </tr>
+  <tr>
+    <td><code>months_valid</code></td>
+    <td>integer</td>
+    <td>For how many months the subscription was ordered</td>
+  </tr>
 </table>
 
 ## Request Example
